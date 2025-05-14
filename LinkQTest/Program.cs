@@ -96,4 +96,8 @@ namespace LinkQTest
 
 //// riscrivere tutto fatto in classe con aggregate (opzionale)
 //// scrive query linkQ tutti nick student onii-san
-//// m
+//// media temperature città che iniziano con O
+/// nome città temp maggiore
+/// prendi list cities e temperature e crea dizionario uguale a cityTemp (list to dictionary)
+/// prendi nick e fai dizionario nick ed age
+/// 
