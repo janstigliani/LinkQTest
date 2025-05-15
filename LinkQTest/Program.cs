@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace LinkQTest
 {
@@ -83,6 +84,12 @@ namespace LinkQTest
             //{
             //    Console.WriteLine($"Student: {orderedStudents[i].Name}, {orderedStudents[i].Age}");
             //}
+            var studentsOniiSan = students.Where(s => s.IsOniiSan == true).ToList();
+
+            //for (var i = 0; i < studentsOniiSan.Count; i++)
+            //{
+            //    Console.WriteLine($"Student: {studentsOniiSan[i].Name}");
+            //}
 
             var cityNameTemperatureAbove30 = cityTemprerature.Where(kv => kv.Value > 30).Select(kv => kv.Key).ToList();
 
@@ -98,21 +105,29 @@ namespace LinkQTest
             //    Console.WriteLine($"Student: {nicknameList[i]}");
             //}
 
-            var tempCitiesStartingWithO = cityTemprerature.Where(kv => kv.Key.StartsWith("O")).Select(kv => kv.Value).ToList();
-            double avgTemp = 0;
+            var avgTempCitiesStartingWithO = cityTemprerature.Where(kv => kv.Key.StartsWith("O")).Select(kv => kv.Value).Average();
+            Console.WriteLine(avgTempCitiesStartingWithO);
 
-            for (var i = 0; i < tempCitiesStartingWithO.Count; i++)
-            {
-                Console.WriteLine($"Temp: {tempCitiesStartingWithO[i]}");
-                avgTemp += tempCitiesStartingWithO[i];
+            //double avgTemp = 0;
 
-            }
+            //for (var i = 0; i < tempCitiesStartingWithO.Count; i++)
+            //{
+            //    Console.WriteLine($"Temp: {tempCitiesStartingWithO[i]}");
+            //    avgTemp += tempCitiesStartingWithO[i];
 
-            Console.WriteLine(avgTemp/tempCitiesStartingWithO.Count);
+            //}
 
-            var cityNameHigherTemp = cityTemprerature.Where(kv => Math.Max(kv.Value)).Select(Kv => Kv.Key);
+            //Console.WriteLine(avgTemp/tempCitiesStartingWithO.Count);
 
-            var citytempdict = cities.
+
+            //var cityNameHigherTemp = cityTemprerature.Where(kv => Math.Max(kv.Value)).Select(Kv => Kv.Key);
+            var cityNameHigherTemp = cityTemprerature.OrderByDescending(kv => kv.Value).Select(kv => kv.Key).FirstOrDefault();
+            Console.WriteLine(cityNameHigherTemp);
+
+            //var cityTempDict = cities.Zip(temperatures).ToDictionary(); //versione semplice generica senza nomi corretti
+            var cityTempDict = cities.Zip(temperatures, (city, temperature) => new { city, temperature }).ToDictionary(Key => Key.city, value => value.temperature);
+
+            var nickAgeDict = nicknameStudents.ToDictionary(key => key.Key, value => value.Value.Age);
         }
     }
 }
