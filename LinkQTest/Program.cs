@@ -86,10 +86,33 @@ namespace LinkQTest
 
             var cityNameTemperatureAbove30 = cityTemprerature.Where(kv => kv.Value > 30).Select(kv => kv.Key).ToList();
 
-            for (var i = 0; i < cityNameTemperatureAbove30.Count; i++)
+            //for (var i = 0; i < cityNameTemperatureAbove30.Count; i++)
+            //{
+            //    Console.WriteLine($"Student: {cityNameTemperatureAbove30[i]}");
+            //}
+
+            var nicknameList = nicknameStudents.Select(kv => kv.Key).ToList();
+
+            //for (var i = 0; i < nicknameList.Count; i++)
+            //{
+            //    Console.WriteLine($"Student: {nicknameList[i]}");
+            //}
+
+            var tempCitiesStartingWithO = cityTemprerature.Where(kv => kv.Key.StartsWith("O")).Select(kv => kv.Value).ToList();
+            double avgTemp = 0;
+
+            for (var i = 0; i < tempCitiesStartingWithO.Count; i++)
             {
-                Console.WriteLine($"Student: {cityNameTemperatureAbove30[i]}");
+                Console.WriteLine($"Temp: {tempCitiesStartingWithO[i]}");
+                avgTemp += tempCitiesStartingWithO[i];
+
             }
+
+            Console.WriteLine(avgTemp/tempCitiesStartingWithO.Count);
+
+            var cityNameHigherTemp = cityTemprerature.Where(kv => Math.Max(kv.Value)).Select(Kv => Kv.Key);
+
+            var citytempdict = cities.
         }
     }
 }
